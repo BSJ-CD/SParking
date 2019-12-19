@@ -51,14 +51,33 @@ public class LoginActivity extends AppCompatActivity {
                 String url = getResources().getString(R.string.URL_User) + "?User.username=" + username+"&User.password="+password;
                 System.out.println("get url "+url);
 
-                boolean flag;
                 GetUserData getuserdata = new GetUserData();
-                flag = getuserdata.getUserData(url);
-                if(flag == true){
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                    startActivity(intent);
-                    LoginActivity.this.finish();
-                }
+                getuserdata.getUserData(url, new GetUserData.SuccessCallback() {
+                            @Override
+                            public void onSuccess() {
+                                Toast.makeText(LoginActivity.this, "Login Success!", Toast.LENGTH_LONG).show();
+                                relativeLayoutLoggingLoad.setVisibility(View.INVISIBLE);
+                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                startActivity(intent);
+                                LoginActivity.this.finish();
+                            }
+                        }, new GetUserData.FailCallback() {
+                            @Override
+                            public void onFail() {
+                                System.out.println("fail");
+                                Toast.makeText(LoginActivity.this, "Login Failed!", Toast.LENGTH_LONG).show();
+                                relativeLayoutLoggingLoad.setVisibility(View.INVISIBLE);
+                            }
+                        });
+            }
+        });
+
+        btn_register.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(intent);
+                //LoginActivity.this.finish();
             }
         });
 

@@ -1,14 +1,9 @@
 package com.example.sparking.GetData;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request.Method;
-import com.android.volley.RequestQueue;
+import com.android.volley.Request;
 import com.android.volley.Response;
-import com.android.volley.Response.ErrorListener;
-import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 import com.example.sparking.myApplication;
 
 import org.json.JSONArray;
@@ -20,25 +15,25 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class GetUserData {
-    public void getUserData(String url,final SuccessCallback successCallback,
-                               final FailCallback failCallback){
-        System.out.println("------------start GetUserData");
-        JsonObjectRequest request = new JsonObjectRequest(Method.GET, url, null, new Listener<JSONObject>(){
+public class GetParkingSlotData {
+    public GetParkingSlotData(String url,final SuccessCallback successCallback,
+                            final FailCallback failCallback){
+        System.out.println("------------start GetParkingSlotData");
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>(){
             @Override
             public void onResponse(JSONObject obj) {
                 System.out.println("----------:" + obj);
 
                 try {
-                    JSONArray ja = obj.getJSONArray("User");
-                    JSONObject jobject = ja.getJSONObject(0);
-                    System.out.println("有用的内容：" + jobject);
-                    configure.MEJSON = jobject;
-                    configure.changeData();
-                    System.out.println("用户名："+configure.USERNAME+"密码："+configure.PASSWORD);
-                    System.out.println("返回内容：" + configure.MEJSON);
+                      JSONArray ja = obj.getJSONArray("Parkingslot");
+//                    JSONObject jobject = ja.getJSONObject(0);
+//                    System.out.println("有用的内容：" + jobject);
+//                    configure.MEJSON = jobject;
+//                    configure.changeData();
+//                    System.out.println("用户名："+configure.USERNAME+"密码："+configure.PASSWORD);
+//                    System.out.println("返回内容：" + configure.MEJSON);
                     if (successCallback != null)
-                        successCallback.onSuccess();
+                        successCallback.onSuccess(obj);
                 } catch (JSONException e) {
                     // TODO Auto-generated catch block
                     failCallback.onFail();
@@ -60,10 +55,11 @@ public class GetUserData {
     }
 
     public static interface SuccessCallback {
-        void onSuccess();
+        void onSuccess(JSONObject obj);
     }
 
     public static interface FailCallback {
         void onFail();
     }
 }
+
