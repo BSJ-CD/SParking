@@ -8,7 +8,7 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.sparking.LoginActivity;
 import com.example.sparking.MainActivity;
-import com.example.sparking.MySingleton;
+
 import com.example.sparking.myApplication;
 
 import org.json.JSONArray;

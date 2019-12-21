@@ -12,13 +12,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class PutSlotownershipData {
-    public PutSlotownershipData(String PID, String slotid, long slot_owner_id,
+    public PutSlotownershipData(String PID, String slotid, long slot_owner_id,int onrent,
                               final PutSlotownershipData.SuccessCallback successCallback,
                               final PutSlotownershipData.FailCallback failCallback)  {
         String url = configure.URL_Slotownership+PID;
         System.out.println("get url " + url);
 
-        String ps = "{\"slotid\":\""+slotid+"\",\"onrent\":0,\"slotowner\":{\"id\":"+slot_owner_id+"},\"slotrenter\":{\"id\":"+configure.USER_ID+"}}";
+        String ps = "{\"slotid\":\""+slotid+"\",\"onrent\":"+onrent+",\"slotowner\":{\"id\":"+slot_owner_id+"},\"slotrenter\":{\"id\":"+configure.USER_ID+"}}";
 
         JSONObject jsonObject = null;
         try {

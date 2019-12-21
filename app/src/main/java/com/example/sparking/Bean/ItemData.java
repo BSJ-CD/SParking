@@ -1,4 +1,4 @@
-package com.example.sparking.Adapter;
+package com.example.sparking.Bean;
 import java.io.Serializable;
 
 public class ItemData implements Serializable{

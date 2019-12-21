@@ -5,11 +5,10 @@ import org.json.JSONObject;
 
 public class configure {
 
-    public static final String URL_User = "http://118.31.76.154:8080/Entity/U40a1d0e1fae02/SParking11/User/";
-    public static final String URL_ParkingSlot = "http://118.31.76.154:8080/Entity/U40a1d0e1fae02/SParking11/Parkingslot/";
-    public static final String URL_Slotownership = "http://118.31.76.154:8080/Entity/U40a1d0e1fae02/SParking11/Slotownership/";
-
-    public static final String URL_Car="http://118.31.76.154:8080/Entity/U40a1d0e1fae02/SParking11/Car/";
+    public static final String URL_User = "http://118.31.76.154:8080/Entity/U40a1d0e1fae02/Sparking1a/User/";
+    public static final String URL_ParkingSlot = "http://118.31.76.154:8080/Entity/U40a1d0e1fae02/Sparking1a/Parkingslot/";
+    public static final String URL_Slotownership = "http://118.31.76.154:8080/Entity/U40a1d0e1fae02/Sparking1a/Slotownership/";
+    public static final String URL_Car="http://118.31.76.154:8080/Entity/U40a1d0e1fae02/Sparking1a/Car/";
 
 
     public static JSONObject MEJSON = new JSONObject();

@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
 
         final ListView parkinginfoList=(ListView) findViewById(R.id.parkinginfoList);
 
-        String userid= configure.ID;
+        String userid= configure.USER_ID;
         System.out.println("userid="+userid);
         new GetCarData().getCarByUser("1576571693834", new GetCarData.SuccessCallback() {
             @Override

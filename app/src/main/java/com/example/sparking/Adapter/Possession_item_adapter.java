@@ -7,16 +7,16 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.example.sparking.Bean.ItemData;
+import com.example.sparking.Bean.possessionItem;
 import com.example.sparking.R;
 
 import java.util.List;
 
-public class Rent_item_adapter extends BaseAdapter
-{
-    private List<ItemData> mDatas;
+public class Possession_item_adapter  extends BaseAdapter {
+
+    private List<possessionItem> mDatas;
     private Context mContext;
-    public Rent_item_adapter(Context context, List<ItemData> Datas)
+    public Possession_item_adapter(Context context, List<possessionItem> Datas)
     {
         this.mContext = context;
         this.mDatas = Datas;
@@ -40,35 +40,34 @@ public class Rent_item_adapter extends BaseAdapter
     @Override
     public View getView(int position, View view, ViewGroup parent) {
         View convertView;
-        MyViewHolder mViewHolder;
+        Possession_item_adapter.MyViewHolder mViewHolder;
 
         if(view == null)
         {
-            convertView = LayoutInflater.from(mContext).inflate(R.layout.rent_item,parent,false);
-            mViewHolder = new MyViewHolder(convertView);
+            convertView = LayoutInflater.from(mContext).inflate(R.layout.possession,parent,false);
+            mViewHolder = new Possession_item_adapter.MyViewHolder(convertView);
             convertView.setTag(mViewHolder);
         }
         else
         {
             convertView = view;
-            mViewHolder = (MyViewHolder) convertView.getTag();
+            mViewHolder = (Possession_item_adapter.MyViewHolder) convertView.getTag();
         }
-       //TODO: Add something u want to show here.
+        //TODO: Add something u want to show here.
         mViewHolder.PID.setText(mDatas.get(position).getPID());
-        mViewHolder.slot_owner_id.setText(mDatas.get(position).getslot_owner_id());
         mViewHolder.slot_name.setText(mDatas.get(position).getslot_name());
         return convertView;
     }
 
     private class MyViewHolder
     {
-        TextView slot_name, PID, slot_owner_id;
+        TextView slot_name, PID;
         MyViewHolder(View view)
         {
             slot_name = view.findViewById(R.id.slot_name);
             PID = view.findViewById(R.id.PID);
-            slot_owner_id = view.findViewById(R.id.slot_owner_id);
             //TODO: Add something u want to show here.
         }
     }
+
 }

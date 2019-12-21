@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.sparking.GetData.GetUserData;
+import com.example.sparking.GetData.configure;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -48,7 +49,11 @@ public class LoginActivity extends AppCompatActivity {
                 relativeLayoutLoggingLoad.setVisibility(View.VISIBLE);
                 String  username = mUser.getText().toString();
                 String  password = mPassword.getText().toString();
-                String url = getResources().getString(R.string.URL_User) + "?User.username=" + username+"&User.password="+password;
+//                //默认登录
+//                username = "caodian";
+//                password = "caodian";
+//                //
+                String url = configure.URL_User + "?User.username=" + username+"&User.password="+password;
                 System.out.println("get url "+url);
 
                 GetUserData getuserdata = new GetUserData();
