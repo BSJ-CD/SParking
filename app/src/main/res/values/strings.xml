@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">SParking</string>
     <string name="URL_User">http://118.31.76.154:8080/Entity/U40a1d0e1fae02/SParking11/User/</string>
+    <string name="ParkingInfo">您的停车信息：</string>
 </resources>

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
@@ -8,9 +10,35 @@
 
     <ImageView
         android:layout_width="150sp"
-        android:layout_height="444dp"
+        android:layout_height="152dp"
         android:paddingTop="20dp"
         android:src="@drawable/logo1" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/parkinfoLayout"
+        android:layout_width="match_parent"
+        android:layout_height="341dp">
+
+        <TextView
+            android:id="@+id/parkinfoView"
+            android:layout_width="246dp"
+            android:layout_height="39dp"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/ParkingInfo"
+            android:textSize="28sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ListView
+            android:id="@+id/parkinginfoList"
+            android:layout_width="398dp"
+            android:layout_height="188dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/parkinfoView" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -47,4 +75,5 @@
             android:textColor="#fff"
             android:textSize="20sp" />
     </LinearLayout>
+
 </LinearLayout>
