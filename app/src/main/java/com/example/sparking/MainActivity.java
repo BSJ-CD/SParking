@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
 
         final ListView parkinginfoList=(ListView) findViewById(R.id.parkinginfoList);
 
-        String userid= configure.ID;
+        String userid= configure.USER_ID;
         System.out.println("userid="+userid);
         //存车信息的list
         final List<Map<String,Object>> carviewlist=new ArrayList<Map<String,Object>>();
@@ -77,8 +77,8 @@ public class MainActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
         parkinginfoList.setAdapter(adapter);
 
-
-        new GetCarData().getCarByUser("1576571693834", new GetCarData.SuccessCallback() {
+        //caodian 1576571693834
+        new GetCarData().getCarByUser(userid, new GetCarData.SuccessCallback() {
             @Override
             public void onSuccess(JSONObject obj) {
                 if (obj==null || obj.length()==0){
@@ -104,9 +104,9 @@ public class MainActivity extends AppCompatActivity {
                                     System.out.println(obj);
                                     if (obj==null){
                                         //没有停车
-                                        map.put("slotid","没停");
-                                        carviewlist.add(map);
-                                        adapter.notifyDataSetChanged();
+                                        //map.put("slotid","没停");
+                                        //carviewlist.add(map);
+                                        //adapter.notifyDataSetChanged();
                                     }
                                     else{
                                         //停在车位
@@ -139,6 +139,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFail(VolleyError error) {
                 System.out.println(error);
+                final Map<String, Object> map=new HashMap<String,Object>();
+                map.put("carnumber","NONETC");
+                map.put("slotid","Z00");
+                carviewlist.add(map);
+                adapter.notifyDataSetChanged();
             }
         });
     }

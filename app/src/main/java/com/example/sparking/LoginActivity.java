@@ -17,6 +17,10 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.sparking.GetData.GetUserData;
+import com.example.sparking.GetData.configure;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -46,8 +50,8 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View arg0) {
                 // TODO Auto-generated method stub
                 relativeLayoutLoggingLoad.setVisibility(View.VISIBLE);
-                String  username = mUser.getText().toString();
-                String  password = mPassword.getText().toString();
+                final String  username = mUser.getText().toString();
+                final String  password = mPassword.getText().toString();
                 String url = getResources().getString(R.string.URL_User) + "?User.username=" + username+"&User.password="+password;
                 System.out.println("get url "+url);
 
@@ -65,8 +69,28 @@ public class LoginActivity extends AppCompatActivity {
                             @Override
                             public void onFail() {
                                 System.out.println("fail");
+
+                                if (username.equals("network") && password.equals("network")){
+                                    //login with default userpass
+                                    JSONObject defaultuser=new JSONObject();
+                                    try {
+                                        defaultuser.put("id","000");
+                                        defaultuser.put("username","network");
+                                        defaultuser.put("username","network");
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                    configure.MEJSON=defaultuser;
+                                    configure.changeData();
+                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                    startActivity(intent);
+                                    LoginActivity.this.finish();
+                                }
                                 Toast.makeText(LoginActivity.this, "Login Failed!", Toast.LENGTH_LONG).show();
                                 relativeLayoutLoggingLoad.setVisibility(View.INVISIBLE);
+
+
+
                             }
                         });
             }

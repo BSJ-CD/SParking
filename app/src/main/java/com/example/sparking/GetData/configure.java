@@ -10,7 +10,8 @@ public class configure {
     public static final String URL_Slotownership = "http://118.31.76.154:8080/Entity/U40a1d0e1fae02/SParking11/Slotownership/";
 
     public static final String URL_Car="http://118.31.76.154:8080/Entity/U40a1d0e1fae02/SParking11/Car/";
-
+    public static final String URL_Base="http://118.31.76.154:8080/Entity/U40a1d0e1fae02/SParking11/";
+    public static final String URL_ParkFee=URL_Base+"Parkfee/";
 
     public static JSONObject MEJSON = new JSONObject();
 

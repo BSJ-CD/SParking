@@ -1,5 +1,6 @@
 package com.example.sparking.Adapters;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +13,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.sparking.PayActivity;
 import com.example.sparking.R;
+
+import static androidx.core.content.ContextCompat.startActivity;
 
 public class ParkinfoAdapter extends BaseAdapter {
     private List<Map<String,Object>> data;
@@ -73,13 +77,18 @@ public class ParkinfoAdapter extends BaseAdapter {
         holder.carnumbertext.setText("车牌号"+(String)data.get(i).get("carnumber"));
         holder.slotidtext.setText("车位"+(String)data.get(i).get("slotid"));
         holder.timetext.setText((String)data.get(i).get("time"));
+
+        final String carnumber=(String)data.get(i).get("carnumber");
         holder.payBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                System.out.println("=======pay button clicked");
+                Intent intent = new Intent(context, PayActivity.class);
+                intent.putExtra("EXTRA_CAR_NUMBER",carnumber);
+                context.startActivity(intent);
             }
         });
 
         return convertView;
     }
+
 }

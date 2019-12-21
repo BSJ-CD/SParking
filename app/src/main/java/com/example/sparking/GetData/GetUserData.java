@@ -51,6 +51,7 @@ public class GetUserData {
                 System.out.println("----------:error");
                 error.getMessage();
                 System.out.println(error.getMessage());
+                failCallback.onFail();
             }
         });
         // 设置请求的Tag标签，可以在全局请求队列中通过Tag标签进行请求的查找
