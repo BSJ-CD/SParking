@@ -65,7 +65,7 @@ public class RegisterActivity extends AppCompatActivity {
                     new PostUserData(name, email, password, new PostUserData.SuccessCallback() {
                         @Override
                         public void onSuccess(String id) {
-                            configure.ID = id;
+//                            configure.USER_ID = id;
                             Toast.makeText(RegisterActivity.this, "Register Success!", Toast.LENGTH_LONG).show();
                             Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                             startActivity(intent);
