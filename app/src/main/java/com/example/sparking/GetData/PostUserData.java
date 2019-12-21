@@ -67,7 +67,7 @@ public class PostUserData {
         });
 
         // 设置请求的Tag标签，可以在全局请求队列中通过Tag标签进行请求的查找
-        request.setTag("get data");
+        request.setTag("post data");
         // 将请求加入全局队列中
         myApplication.getHttpQueues().add(request);
     }
