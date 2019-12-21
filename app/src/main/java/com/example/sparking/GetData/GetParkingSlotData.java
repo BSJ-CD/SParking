@@ -16,6 +16,10 @@ import java.util.List;
 import java.util.Map;
 
 public class GetParkingSlotData {
+    public GetParkingSlotData(){
+        //do nothing
+    }
+
     public GetParkingSlotData(String url,final SuccessCallback successCallback,
                             final FailCallback failCallback){
         System.out.println("------------start GetParkingSlotData");
@@ -50,6 +54,37 @@ public class GetParkingSlotData {
         });
         // 设置请求的Tag标签，可以在全局请求队列中通过Tag标签进行请求的查找
         request.setTag("get data");
+        // 将请求加入全局队列中
+        myApplication.getHttpQueues().add(request);
+    }
+
+    public void GetParkingSlotDataByCarNumber(String carnumber,final SuccessCallback successCallback,
+                              final FailCallback failCallback){
+        String url=configure.URL_ParkingSlot+"?Parkingslot.car="+carnumber+"&Parkingslot.isempty=0";
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>(){
+            @Override
+            public void onResponse(JSONObject obj) {
+                //System.out.println(obj);
+                try {
+                    JSONArray slots=obj.getJSONArray("Parkingslot");
+                    //应该只有一个停车位
+                    JSONObject slot=slots.getJSONObject(0);
+                    successCallback.onSuccess(slot);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    successCallback.onSuccess(null);
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.getMessage();
+                System.out.println(error.getMessage());
+            }
+        });
+        // 设置请求的Tag标签，可以在全局请求队列中通过Tag标签进行请求的查找
+        request.setTag("get slotdata");
         // 将请求加入全局队列中
         myApplication.getHttpQueues().add(request);
     }

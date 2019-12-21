@@ -13,8 +13,10 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.example.sparking.Adapters.ParkinfoAdapter;
 import com.example.sparking.GetData.GetCarData;
 import com.example.sparking.GetData.GetParkingInfo;
+import com.example.sparking.GetData.GetParkingSlotData;
 import com.example.sparking.GetData.configure;
 
 import org.json.JSONArray;
@@ -68,7 +70,15 @@ public class MainActivity extends AppCompatActivity {
 
         String userid= configure.USER_ID;
         System.out.println("userid="+userid);
-        new GetCarData().getCarByUser("1576571693834", new GetCarData.SuccessCallback() {
+        //存车信息的list
+        final List<Map<String,Object>> carviewlist=new ArrayList<Map<String,Object>>();
+        //final SimpleAdapter adapter=new SimpleAdapter(MainActivity.this,carviewlist,R.layout.adapter_parkinfo,new String[]{"carnumberView","slotidView"},new int[]{R.id.carnumberView,R.id.slotidView});
+        final ParkinfoAdapter adapter=new ParkinfoAdapter(MainActivity.this,carviewlist);
+        adapter.notifyDataSetChanged();
+        parkinginfoList.setAdapter(adapter);
+
+        //caodian 1576571693834
+        new GetCarData().getCarByUser(userid, new GetCarData.SuccessCallback() {
             @Override
             public void onSuccess(JSONObject obj) {
                 if (obj==null || obj.length()==0){
@@ -78,26 +88,47 @@ public class MainActivity extends AppCompatActivity {
                     //
                     try {
                         JSONArray carList=obj.getJSONArray("Car");
-                        //存车信息的list
-                        List<Map<String,Object>> carviewlist=new ArrayList<Map<String,Object>>();
                         //看看一共几辆车
                         for (int i=0;i<carList.length();i+=1) {
-                            Map<String, Object> map=new HashMap<String,Object>();
+                            final Map<String, Object> map=new HashMap<String,Object>();
                             JSONObject carObj = carList.getJSONObject(i);
                             String carnumber = carObj.getString("carnumber");
                             System.out.println(carnumber);
-                            map.put("carnumberView",carnumber);
-                            map.put("slotidView","000");
+                            map.put("carnumber",carnumber);
+                            map.put("slotid","未停");
 
                             //根据车牌号查停车状态
-
-
-
-                            carviewlist.add(map);
+                            new GetParkingSlotData().GetParkingSlotDataByCarNumber(carnumber, new GetParkingSlotData.SuccessCallback() {
+                                @Override
+                                public void onSuccess(JSONObject obj) {
+                                    System.out.println(obj);
+                                    if (obj==null){
+                                        //没有停车
+                                        //map.put("slotid","没停");
+                                        //carviewlist.add(map);
+                                        //adapter.notifyDataSetChanged();
+                                    }
+                                    else{
+                                        //停在车位
+                                        try {
+                                            String slotname=obj.getString("slotid");
+                                            map.put("slotid",slotname);
+                                            carviewlist.add(map);
+                                            adapter.notifyDataSetChanged();
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                }
+                            }, new GetParkingSlotData.FailCallback() {
+                                @Override
+                                public void onFail() {
+                                    System.out.println("getparkingslotbycarnumber failed");
+                                }
+                            });
                         }
                         //绘制车列表的适配器
-                        SimpleAdapter adapter=new SimpleAdapter(MainActivity.this,carviewlist,R.layout.adapter_parkinfo,new String[]{"carnumberView","slotidView"},new int[]{R.id.carnumberView,R.id.slotidView});
-                        parkinginfoList.setAdapter(adapter);
+
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -108,10 +139,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFail(VolleyError error) {
                 System.out.println(error);
+                final Map<String, Object> map=new HashMap<String,Object>();
+                map.put("carnumber","NONETC");
+                map.put("slotid","Z00");
+                carviewlist.add(map);
+                adapter.notifyDataSetChanged();
             }
         });
     }
-
-
 
 }

@@ -2,4 +2,8 @@
     <string name="app_name">SParking</string>
     <string name="URL_User">http://118.31.76.154:8080/Entity/U40a1d0e1fae02/SParking1a/User/</string>
     <string name="ParkingInfo">您的停车信息：</string>
+    <string name="payandleave">付费离开</string>
+    <string name="payText">您需要支付</string>
+    <string name="payfinishbutton">我付好了</string>
+    <string name="parkTimeText">停车时间</string>
 </resources>
