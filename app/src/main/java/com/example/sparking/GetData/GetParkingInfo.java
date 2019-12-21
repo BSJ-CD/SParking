@@ -1,21 +1,11 @@
 package com.example.sparking.GetData;
 
 
-import com.android.volley.Request;
-import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.example.sparking.LoginActivity;
-import com.example.sparking.MainActivity;
-import com.example.sparking.MySingleton;
-import com.example.sparking.myApplication;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import static com.example.sparking.myApplication.queue;
 
 public class GetParkingInfo {
     public void getParkingInfoByUser(String userid,final SuccessCallback successCallback,

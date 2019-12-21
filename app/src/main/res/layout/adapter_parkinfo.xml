@@ -8,8 +8,8 @@
 
     <TextView
         android:id="@+id/carnumberView"
-        android:layout_width="142dp"
-        android:layout_height="44dp"
+        android:layout_width="wrap_content"
+        android:layout_height="34dp"
         android:layout_marginStart="40dp"
         android:layout_marginTop="24dp"
         android:text="TextView"
@@ -19,11 +19,33 @@
 
     <TextView
         android:id="@+id/slotidView"
-        android:layout_width="147dp"
-        android:layout_height="59dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginTop="20dp"
         android:text="TextView"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/carnumberView" />
+
+    <Button
+        android:id="@+id/payButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/button_round_lightblue"
+        android:text="@string/payandleave"
+        android:textColor="@android:color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/slotidView" />
+
+    <TextView
+        android:id="@+id/timeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="20dp"
+        android:text="TextView"
+        app:layout_constraintStart_toEndOf="@+id/slotidView"
         app:layout_constraintTop_toBottomOf="@+id/carnumberView" />
 </androidx.constraintlayout.widget.ConstraintLayout>
