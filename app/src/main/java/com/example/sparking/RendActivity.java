@@ -38,7 +38,7 @@ public class RendActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rend);
 
-        String url_owner = configure.URL_Slotownership+"?Slotownership.slotowner.id="+configure.USER_ID;
+        String url_owner = configure.URL_Slotownership+"?Slotownership.slotowner.id="+configure.USER_ID+"&Slotownership.onrent=-1";
         new GetSlotownershipData(url_owner, new GetSlotownershipData.SuccessCallback() {
             @Override
             public void onSuccess(JSONObject obj) {
