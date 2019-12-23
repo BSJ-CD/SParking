@@ -8,11 +8,32 @@
     android:orientation="vertical">
 
 
-    <ImageView
-        android:layout_width="150sp"
-        android:layout_height="152dp"
-        android:paddingTop="20dp"
-        android:src="@drawable/logo1" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/headlayout"
+        android:layout_width="match_parent"
+        android:layout_height="80dp">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="79dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/sjtu" />
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="@string/MainTitle"
+            android:textColor="#4867D8"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/parkinfoLayout"
@@ -21,12 +42,12 @@
 
         <TextView
             android:id="@+id/parkinfoView"
-            android:layout_width="246dp"
-            android:layout_height="39dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="28dp"
             android:layout_marginTop="16dp"
             android:text="@string/ParkingInfo"
-            android:textSize="28sp"
+            android:textSize="22sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -38,6 +59,40 @@
             android:layout_marginTop="20dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/parkinfoView" />
+
+        <TextView
+            android:id="@+id/trueinfoTextview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="6dp"
+            android:textSize="22sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/parkinfoView" />
+
+        <EditText
+            android:id="@+id/carnumberinputText"
+            android:layout_width="128dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="12dp"
+            android:ems="10"
+            android:hint="@string/inputcarnumber"
+            android:inputType="textPersonName"
+            app:layout_constraintStart_toEndOf="@+id/parkinfoView"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/button_round_search"
+            android:onClick="searchCar"
+            android:text="@string/search"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@+id/carnumberinputText"
+            app:layout_constraintTop_toTopOf="@+id/carnumberinputText" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout

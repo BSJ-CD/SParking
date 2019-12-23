@@ -16,33 +16,38 @@ public class GetParkfeeData {
     //根据车牌号查找停车时间，返回最多一条数据
     public void getParkfeeDataByCar(String carnumber,final SuccessCallback successCallback,
                                               final FailCallback failCallback){
-        String url=configure.URL_ParkFee+"?ParkFee.carnumber="+carnumber+"&Parkfee.left=0";
+        String url = configure.URL_ParkFee+"?Parkfee.carnumber="+carnumber;
 
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>(){
-            @Override
-            public void onResponse(JSONObject obj) {
-                //System.out.println(obj);
-                try {
-                    JSONArray objArray=obj.getJSONArray("Parkfee");
-                    //至多一个入场时间数据
-                    JSONObject object=objArray.getJSONObject(0);
-                    successCallback.onSuccess(object);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    successCallback.onSuccess(null);
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                error.getMessage();
-                System.out.println(error.getMessage());
-            }
-        });
+        System.out.println(url);
+        //查询用户的车辆
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject obj) {
+                        System.out.println("Response: " + obj.toString());
+                        try {
+                            JSONArray ja=obj.getJSONArray("Parkfee");
+                            successCallback.onSuccess(ja.getJSONObject(0));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            successCallback.onSuccess(null);
+                        }
+
+
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // TODO: Handle error
+                        successCallback.onSuccess(null);
+                    }
+                });
+
         // 设置请求的Tag标签，可以在全局请求队列中通过Tag标签进行请求的查找
-        request.setTag("get parkfee");
-        // 将请求加入全局队列中
-        myApplication.getHttpQueues().add(request);
+        jsonObjectRequest.setTag("getCarData");
+        // Access the RequestQueue.
+        myApplication.getHttpQueues().add(jsonObjectRequest);
     }
 
     public static interface SuccessCallback {

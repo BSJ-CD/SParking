@@ -1,6 +1,8 @@
 package com.example.sparking.GetData;
 
 
+import com.android.volley.Request;
+import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -18,44 +20,47 @@ public class GetParkingInfo {
                                final FailCallback failCallback){
 
         //查询用户的车辆
-        new GetCarData().getCarByUser(userid, new GetCarData.SuccessCallback() {
-            @Override
-            public void onSuccess(JSONObject obj) {
-                if (obj==null || obj.length()==0){
-                    //用户没有车辆数据
-                    successCallback.onSuccess(obj);
-                }
-                else{
-                    //
-                    try {
-                        JSONArray carList=obj.getJSONArray("Car");
-                        //目前只有一辆车for (int i=0;i<carList.length();i+=1){
-                        JSONObject carObj=carList.getJSONObject(0);
-                        carObj.getString("carnumber");
+            String url = configure.URL_ParkInfo+"?Parkinfo.userid="+userid;
+
+            System.out.println(url);
+            //查询用户的车辆
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                    (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+
+                        @Override
+                        public void onResponse(JSONObject obj) {
+                            System.out.println("Response: " + obj.toString());
+                            try {
+                                JSONArray ja=obj.getJSONArray("Parkinfo");
+                                successCallback.onSuccess(ja);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                                successCallback.onSuccess(null);
+                            }
 
 
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            // TODO: Handle error
+                            failCallback.onFail(error);
+                        }
+                    });
 
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-
-                }
-            }
-        }, new GetCarData.FailCallback() {
-            @Override
-            public void onFail(VolleyError error) {
-                System.out.println(error);
-            }
-        });
+            // 设置请求的Tag标签，可以在全局请求队列中通过Tag标签进行请求的查找
+            jsonObjectRequest.setTag("getparkinfo");
+            // Access the RequestQueue
+            myApplication.getHttpQueues().add(jsonObjectRequest);
 
 
     }
 
     public static interface SuccessCallback {
-        void onSuccess(JSONObject obj);
+        void onSuccess(JSONArray obja);
     }
 
     public static interface FailCallback {
-        void onFail();
+        void onFail(VolleyError error);
     }
 }
